@@ -1,14 +1,19 @@
-import javax.swing.*;
-
-//import com.sun.xml.internal.ws.api.Component;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 
 
@@ -36,6 +41,8 @@ public class Fenetre extends JFrame implements ActionListener{
 	private Panneau pan = new Panneau();
 	
 	
+	
+	
 	public Fenetre(){
 		// Fenetre
 		this.setTitle("Reservation de billet.");
@@ -48,7 +55,7 @@ public class Fenetre extends JFrame implements ActionListener{
 	    concert.addItem("Against The Current le 18/08");
 	    concert.addItem("Johnny le retour le 23/08");
 	    concert.addItem("Ozone le 11/09");
-	    concert.addItem("Muse le 18/09");
+	    concert.addItem("Muse le 18/09");  
 	    
 	    // Gestion des police et taille d'écriture
 	    titre.setFont(new Font("Serif", Font.PLAIN, 23));
@@ -110,27 +117,49 @@ public class Fenetre extends JFrame implements ActionListener{
 	    this.setContentPane(pan);
 	    
 	    this.setVisible(true);
-	    
-	    // Connection à la BDD
-	    /*try {
-	        Class.forName("org.postgresql.Driver");
-	        System.out.println("Driver O.K.");
-
-	        String url = "jdbc:postgresql://localhost:5432/Billet";
-	        String user = "postgres";
-	        String passwd = "postgres";
-
-	        Connection conn = DriverManager.getConnection(url, user, passwd);
-	        System.out.println("Connexion effective !");         
-	           
-	      } catch (Exception e) {
-	        e.printStackTrace();
-	      }  */
-	    
-	    
 	}
 	
-	public void actionPerformed(ActionEvent arg0) {      
-		System.out.println("Nom:" + innom.getText() + " Prenom:" + inprenom.getText() + " mail:"+ inmail.getText() +"\n" + " concert:"+concert.getSelectedItem() + " assise:" + assise.isSelected());
-	  } 
-}
+	
+	// Le clic
+	public void actionPerformed(ActionEvent arg0)  
+			throws ChampVideException {     	    
+		// Connection à la BDD
+		
+			 if(innom.getText().equals("") || inprenom.getText().equals("") || inmail.getText().equals("")) {
+				 throw new ChampVideException();
+			 }
+			 else {
+				 try {
+				        Class.forName("org.postgresql.Driver");
+
+				        String url = "jdbc:postgresql://localhost:5432/billeterie";
+				        String user = "postgres";
+				        String passwd = "postgres"; 
+
+				        Connection conn = DriverManager.getConnection(url, user, passwd);
+				        Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+						
+				        state.executeUpdate("INSERT INTO billet (prenom, nom, mail, concert, assise) VALUES('"+inprenom.getText()+"','"+innom.getText()+"','"+inmail.getText()+"','"+concert.getSelectedItem()+"','"+assise.isSelected()+"')");
+				        System.out.println("Informations rentrées dans la BDD");
+				      } 
+				 catch (Exception e) {
+					 e.printStackTrace();
+				 } 
+			 }		 		 
+			} 
+} 
+
+	//public void actionPerformed(ActionEvent arg0) { }
+
+/*Did not find any relations.
+CREATE TABLE billet(
+   prenom  TEXT  NOT NULL,
+   nom     TEXT  NOT NULL,
+   mail    CHAR(100),
+   concert   CHAR(100),
+   assise  boolean
+ );
+ 
+ INSERT INTO billet ('prenom', 'nom', 'mail', 'concert', true)
+ 
+ */
