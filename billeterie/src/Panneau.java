@@ -21,7 +21,7 @@ public class Panneau extends JPanel {
 	  }   
 	
 	  
-	 
+	 // test
 	  
 	  /*public void paint(Graphics comp) {
 		  Image img = Toolkit.getDefaultToolkit().getImage("back2.png");
