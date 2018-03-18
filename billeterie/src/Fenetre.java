@@ -13,6 +13,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 
@@ -155,13 +156,17 @@ public class Fenetre extends JFrame implements ActionListener{
 		try {
 			BilletController bc = new BilletController();
 			bc.reserveBillet(inprenom.getText(), innom.getText(), inmail.getText(), concert.getSelectedItem().toString(), assise.isSelected());			
-			} catch (ChampVideException exp) {
-				exp.printStackTrace();
-			} catch (EmailInvalidException  exp) {
-				exp.printStackTrace();
-			} catch (Exception exp) {
-				exp.printStackTrace();
-			}		 		 
+		} catch (ChampVideException exp) {
+			exp.printStackTrace();
+			String message = "Au moins un champs n'a pas été rempli !";
+			JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",  JOptionPane.ERROR_MESSAGE);
+		} catch (EmailInvalidException  exp) {
+			exp.printStackTrace();
+			String message = exp.getMessage();
+			JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",  JOptionPane.ERROR_MESSAGE);
+		} catch (Exception exp) {
+			exp.printStackTrace();
+		}		 		 
 	} 
 }
 

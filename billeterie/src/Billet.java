@@ -1,3 +1,5 @@
+import java.util.regex.Pattern;
+
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
@@ -19,15 +21,15 @@ public class Billet {
 		if(isStringNullOrEmpty(this.nom) || isStringNullOrEmpty(this.prenom) || isStringNullOrEmpty(this.prenom)) 
 		{
 			throw new ChampVideException();
-		}		
-//		try {
-//			InternetAddress ia = new InternetAddress(this.email);
-//			ia.validate();
+		}
+		
+		// email validation
+		if(isValidEmail(this.email)) {
 			return true;
-//		}		
-//		catch (AddressException exp){
-//			throw new EmailInvalidException();
-//		}		
+		} 
+		else {
+			throw new EmailInvalidException();
+		}				
 	}
 	
 	private static boolean isStringNullOrEmpty(String value)
@@ -35,6 +37,19 @@ public class Billet {
 	  return (value == null || value.trim().equals(""));
 	}
 	
+	 public static boolean isValidEmail(String email)
+	    {
+	        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+	                            "[a-zA-Z0-9_+&*-]+)*@" +
+	                            "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+	                            "A-Z]{2,7}$";
+	                             
+	        Pattern pat = Pattern.compile(emailRegex);
+	        if (email == null)
+	            return false;
+	        return pat.matcher(email).matches();
+	    }
+	 
 	// Getter and Setters
 	
 	public String getNom() {
