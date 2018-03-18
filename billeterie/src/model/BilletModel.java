@@ -1,14 +1,14 @@
+package model;
 import java.util.regex.Pattern;
+import exceptions.ChampVideException;
+import exceptions.EmailInvalidException;
 
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
 
-
-public class Billet {
+public class BilletModel {
 	private String nom, prenom, email, concert;	
 	private Boolean assise;
 	
-	public Billet(String nom, String prenom, String email, String concert, Boolean assise) {
+	public BilletModel(String nom, String prenom, String email, String concert, Boolean assise) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;

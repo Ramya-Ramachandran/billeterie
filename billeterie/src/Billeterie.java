@@ -1,10 +1,12 @@
 import javax.swing.*;
 
+import view.FenetreView;
+
 
 public class Billeterie {
 	
 	public static void main(String[] args){
-		Fenetre fenetre = new Fenetre();
+		FenetreView fenetre = new FenetreView();
 		
 	}
 

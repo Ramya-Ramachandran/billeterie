@@ -1,3 +1,4 @@
+package exceptions;
 
 public class ChampVideException extends RuntimeException {
 	public ChampVideException() {

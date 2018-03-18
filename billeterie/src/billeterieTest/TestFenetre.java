@@ -1,4 +1,4 @@
-package billeterie;
+package billeterieTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 

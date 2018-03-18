@@ -1,3 +1,4 @@
+package view;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -16,9 +17,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import controller.BilletController;
+import exceptions.ChampVideException;
+import exceptions.EmailInvalidException;
 
 
-public class Fenetre extends JFrame implements ActionListener{
+
+public class FenetreView extends JFrame implements ActionListener{
 	// Création des différents éléments 
 	// Titre
 	private JLabel titre = new JLabel("Reservation de billets :");
@@ -44,7 +49,7 @@ public class Fenetre extends JFrame implements ActionListener{
 	
 	
 	
-	public Fenetre(){
+	public FenetreView(){
 		// Fenetre
 		this.setTitle("Reservation de billet.");
 	    this.setSize(800, 600);
