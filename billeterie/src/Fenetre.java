@@ -121,7 +121,7 @@ public class Fenetre extends JFrame implements ActionListener{
 	
 	
 	// Le clic
-	public void actionPerformed(ActionEvent arg0)  
+	public void actionPerformedOld(ActionEvent arg0)  
 			throws ChampVideException {     	    
 		// Connection à la BDD
 		
@@ -146,20 +146,33 @@ public class Fenetre extends JFrame implements ActionListener{
 					 e.printStackTrace();
 				 } 
 			 }		 		 
-			} 
-} 
+		} 
 
-	//public void actionPerformed(ActionEvent arg0) { }
+	// Le clic
+	public void actionPerformed(ActionEvent arg0)  
+			throws ChampVideException {  
+		
+		try {
+			BilletController bc = new BilletController();
+			bc.reserveBillet(inprenom.getText(), innom.getText(), inmail.getText(), concert.getSelectedItem().toString(), assise.isSelected());			
+			} catch (ChampVideException exp) {
+				exp.printStackTrace();
+			} catch (EmailInvalidException  exp) {
+				exp.printStackTrace();
+			} catch (Exception exp) {
+				exp.printStackTrace();
+			}		 		 
+	} 
+}
 
-/*Did not find any relations.
+
+/*
 CREATE TABLE billet(
    prenom  TEXT  NOT NULL,
    nom     TEXT  NOT NULL,
    mail    CHAR(100),
    concert   CHAR(100),
    assise  boolean
- );
- 
- INSERT INTO billet ('prenom', 'nom', 'mail', 'concert', true)
- 
+ ); 
+ INSERT INTO billet ('prenom', 'nom', 'mail', 'concert', true) 
  */
