@@ -23,7 +23,7 @@ class BilletModelTest {
 	@Test
 	void testBilletWithInvalidEmail() {
 		
-		BilletModel billet = new BilletModel("John", "Pascal", "invalidEmail", "concertName", true);
+		BilletModel billet = new BilletModel("", "Pascal", "invalidEmail", "concertName", true);
 		try {
 			billet.isValid();
 			fail("Expected an EmailInvalidException to be thrown");
@@ -47,7 +47,7 @@ class BilletModelTest {
 
 	@Test
 	void testBilletWithEmptyPrenom() {		
-		BilletModel billet = new BilletModel("John", null, "invalidEmail", "concertName", true);
+		BilletModel billet = new BilletModel("John", null, "invalidEmail@hh.com", "concertName", true);
 		try {
 			billet.isValid();
 			fail("Expected an ChampVideException to be thrown");

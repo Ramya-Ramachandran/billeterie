@@ -164,11 +164,11 @@ public class FenetreView extends JFrame implements ActionListener{
 		} catch (ChampVideException exp) {
 			exp.printStackTrace();
 			String message = "Au moins un champs n'a pas été rempli !";
-			JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",  JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(new JFrame(), message, "Erreur",  JOptionPane.ERROR_MESSAGE);
 		} catch (EmailInvalidException  exp) {
 			exp.printStackTrace();
 			String message = exp.getMessage();
-			JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",  JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(new JFrame(), message, "Erreur",  JOptionPane.ERROR_MESSAGE);
 		} catch (Exception exp) {
 			exp.printStackTrace();
 		}		 		 
